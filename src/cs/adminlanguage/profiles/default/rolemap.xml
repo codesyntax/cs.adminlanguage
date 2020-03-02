@@ -1,7 +1,15 @@
 <?xml version="1.0"?>
 <rolemap>
-  <permissions>
-  <!-- -*- extra stuff goes here -*- -->
 
+  <roles>
+    <role name="AdminLanguageReader"/>
+  </roles>
+
+  <permissions>
+    <permission name="cs.adminlanguage: ViewinAdminLanguage" acquire="False">
+      <role name="AdminLanguageReader"/>
+    </permission>
   </permissions>
+
+
 </rolemap>

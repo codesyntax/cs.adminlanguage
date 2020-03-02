@@ -5,7 +5,7 @@
 
 <!-- -*- extra stuff goes here -*- -->
   <records interface="cs.adminlanguage.settings.ISettings"
-          prefix="admin_language" />
+          prefix="admin_language" remove="true" />
 
 
 </registry>

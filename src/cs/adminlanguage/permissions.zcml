@@ -5,7 +5,10 @@
 
   <configure zcml:condition="installed AccessControl.security">
   <!-- -*- extra stuff goes here -*- -->
-
+    <permission
+          id="cs.adminlanguage.ViewinAdminLanguage"
+          title="cs.adminlanguage: ViewinAdminLanguage"
+    />
 
   </configure>
 

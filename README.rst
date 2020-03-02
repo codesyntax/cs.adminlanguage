@@ -6,7 +6,11 @@
 cs.adminlanguage
 ================
 
-Tell me what your product does
+This package provides a control panel to configure in which language do you want to show the admin interface.
+
+This is useful if you need to configure a website in a language you don't know.
+
+This package is based in Silvuple_ a package that use to do this and more for Plone 3.
 
 Features
 --------
@@ -26,13 +30,6 @@ Documentation
 
 Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
 
-
-Translations
-------------
-
-This product has been translated into
-
-- Klingon (thanks, K'Plai)
 
 
 Installation
@@ -56,17 +53,18 @@ Contribute
 
 - Issue Tracker: https://github.com/collective/cs.adminlanguage/issues
 - Source Code: https://github.com/collective/cs.adminlanguage
-- Documentation: https://docs.plone.org/foo/bar
 
 
 Support
 -------
 
-If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
+If you are having issues, please let us know adding an issue in Github
 
 
 License
 -------
 
 The project is licensed under the GPLv2.
+
+
+.. _Silvuple: https://github.com/miohtama/silvuple/
