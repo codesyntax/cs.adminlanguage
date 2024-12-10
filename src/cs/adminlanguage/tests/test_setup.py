@@ -29,8 +29,11 @@ class TestSetup(unittest.TestCase):
 
     def test_product_installed(self):
         """Test if cs.adminlanguage is installed."""
-        self.assertTrue(self.installer.isProductInstalled(
-            'cs.adminlanguage'))
+        try:
+            is_installed = self.installer.is_product_installed
+        except AttributeError:
+            is_installed = self.installer.isProductInstalled
+        self.assertTrue(is_installed('cs.adminlanguage'))
 
     def test_browserlayer(self):
         """Test that ICsAdminlanguageLayer is registered."""
@@ -48,19 +51,23 @@ class TestUninstall(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        if get_installer:
-            self.installer = get_installer(self.portal, self.layer['request'])
-        else:
-            self.installer = api.portal.get_tool('portal_quickinstaller')
         roles_before = api.user.get_roles(TEST_USER_ID)
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.installer.uninstallProducts(['cs.adminlanguage'])
+        if get_installer:
+            self.installer = get_installer(self.portal, self.layer['request'])
+            self.installer.uninstall_product('cs.adminlanguage')
+        else:
+            self.installer = api.portal.get_tool('portal_quickinstaller')
+            self.installer.uninstallProducts(['cs.adminlanguage'])
         setRoles(self.portal, TEST_USER_ID, roles_before)
 
     def test_product_uninstalled(self):
         """Test if cs.adminlanguage is cleanly uninstalled."""
-        self.assertFalse(self.installer.isProductInstalled(
-            'cs.adminlanguage'))
+        try:
+            is_installed = self.installer.is_product_installed
+        except AttributeError:
+            is_installed = self.installer.isProductInstalled
+        self.assertFalse(is_installed('cs.adminlanguage'))
 
     def test_browserlayer_removed(self):
         """Test that ICsAdminlanguageLayer is removed."""
