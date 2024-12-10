@@ -29,15 +29,11 @@ def find_context(request):
     return context
 
 
-def get_editor_language(request):
-    """
-    Get editor language override if Silvuple is installed.
-    """
+def _get_editor_language(request):
+    """Get editor language override if cs.adminlanguage is installed.
 
-    cached = getattr(request, "_cached_admin_language", None)
-    if cached:
-        return cached
-
+    This is the uncached version.
+    """
     if not ICsAdminlanguageLayer.providedBy(request):
         # Add on is not active
         return None
@@ -71,14 +67,23 @@ def get_editor_language(request):
         return None
 
     # Read language from settings
-    language = settings.adminLanguage
+    return settings.adminLanguage
 
-    if language:
-        # Fake new language for all authenticated users
-        request._cached_admin_language = language
-        return language
 
-    return None
+_cache_attribute_name = "_cached_admin_language"
+_marker = object()
+
+
+def get_editor_language(request):
+    """Get editor language override if cs.adminlanguage is installed.
+
+    This is the cached version.
+    """
+    language = getattr(request, _cache_attribute_name, _marker)
+    if language is _marker:
+        language = _get_editor_language(request)
+        setattr(request, _cache_attribute_name, language)
+    return language
 
 
 def is_editor_language_domain(domain):
