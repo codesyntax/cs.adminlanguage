@@ -12,26 +12,6 @@ This is useful if you need to configure a website in a language you don't know.
 
 This package is based in Silvuple_ a package that use to do this and more for Plone 3.
 
-Features
---------
-
-- Can be bullet points
-
-
-Examples
---------
-
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
-
-
-Documentation
--------------
-
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
-
-
-
 Installation
 ------------
 
@@ -45,14 +25,21 @@ Install cs.adminlanguage by adding it to your buildout::
         cs.adminlanguage
 
 
-and then running ``bin/buildout``
+and then running ``bin/buildout``.
+Then start Plone and activate the add-on in the Add-ons control panel.
+
+Now you can go to the Language Admin Settings control panel from this add-on and set the prefered admin language.
+This language will be used for all translation messages in domains that start with "plone" or "collective" (or the "linguaplone" domain).
+
+Now any authenticated user with the "cs.adminlanguage: ViewinAdminLanguage" permission will see messages from those domains in the chosen admin language.
+The suggested way for configuring this, is to go to the Groups control panel, select the Administrators and Site Administrators groups, and grant them the AdminLanguageReader role.
 
 
 Contribute
 ----------
 
-- Issue Tracker: https://github.com/collective/cs.adminlanguage/issues
-- Source Code: https://github.com/collective/cs.adminlanguage
+- Issue Tracker: https://github.com/codesyntax/cs.adminlanguage/issues
+- Source Code: https://github.com/codesyntax/cs.adminlanguage
 
 
 Support
