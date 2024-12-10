@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
 """Init and utils."""
-from zope.i18nmessageid import MessageFactory
-
-
-_ = MessageFactory('cs.adminlanguage')
-import negotiator
+from .messagefactory import _  # noqa F401
+from . import negotiator  # noqa F401
