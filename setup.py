@@ -30,6 +30,7 @@ setup(
         "Programming Language :: Python :: 3.12",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+        "Development Status :: 5 - Production/Stable",
     ],
     keywords="Python Plone",
     author="Lur Ibargutxi",
@@ -46,6 +47,7 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
+    python_requires=">=3.10",
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
