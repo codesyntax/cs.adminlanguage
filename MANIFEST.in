@@ -1,15 +1,15 @@
 include *.in
 include *.rst
 include *.txt
-include *.yml
 include .coveragerc
 include base.cfg
 include bobtemplate.cfg
 include buildout.cfg
 include test_plone60.cfg
+recursive-include news *.gitkeep
+recursive-include news *.internal
 recursive-include src *.po
 recursive-include src *.pot
-recursive-include src *.robot
 recursive-include src *.rst
 recursive-include src *.sh
 recursive-include src *.xml
