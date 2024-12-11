@@ -2,12 +2,13 @@
     Override user interface language setting: taken from silvuple:
     https://github.com/miohtama/silvuple/blob/master/silvuple/negotiator.py
 """
+
 from AccessControl import getSecurityManager
 from cs.adminlanguage.interfaces import ICsAdminlanguageLayer
+from cs.adminlanguage.settings import ISettings
 from plone.registry.interfaces import IRegistry
 from Products.CMFCore.interfaces import IContentish
 from Products.CMFCore.interfaces import IFolderish
-from cs.adminlanguage.settings import ISettings
 from zope.component import ComponentLookupError
 from zope.component import getUtility
 from zope.i18n.translationdomain import TranslationDomain
@@ -58,7 +59,8 @@ def _get_editor_language(request):
         # Will raise an exception if plone.app.registry is not quick installed
         registry = getUtility(IRegistry)
 
-        # Will raise exception if your product add-on installer has not been run
+        # Will raise exception if your product add-on installer
+        # has not been run
         settings = registry.forInterface(ISettings, prefix="admin_language")
     except (KeyError, ComponentLookupError):
         # Registry schema and actual values do not match
@@ -88,7 +90,8 @@ def get_editor_language(request):
 
 def is_editor_language_domain(domain):
     """
-    Filter to check which gettext domains will get forced to be in english always.
+    Filter to check which gettext domains will get forced to be in
+    english always.
     """
     return (
         domain.startswith("plone")
@@ -101,10 +104,17 @@ _unpatched_translate = None
 
 
 def _patched_translate(
-    self, msgid, mapping=None, context=None, target_language=None, default=None,
-    msgid_plural=None, default_plural=None, number=None,
+    self,
+    msgid,
+    mapping=None,
+    context=None,
+    target_language=None,
+    default=None,
+    msgid_plural=None,
+    default_plural=None,
+    number=None,
 ):
-    """ TranslationDomain.translate() patched for editor language support
+    """TranslationDomain.translate() patched for editor language support
 
     :param context: HTTPRequest object
 
@@ -116,7 +126,8 @@ def _patched_translate(
     I tried to pass them on when needed by accepting **kwargs and passing those
     along, but this would still result in an error in Plone 6:
 
-    TypeError: _patched_translate() takes from 2 to 6 positional arguments but 9 were given
+    TypeError: _patched_translate() takes from 2 to 6 positional arguments but
+               9 were given
 
     So: accept them, but only pass them along when set.
     """
@@ -132,7 +143,9 @@ def _patched_translate(
         logger.error("Admin language force patch failed")
         logger.exception(e)
 
-    if msgid_plural is not None or default_plural is not None or number is not None:
+    if (
+        msgid_plural is not None or default_plural is not None or number is not None
+    ):  # noqa: E501
         extra = dict(
             msgid_plural=msgid_plural,
             default_plural=default_plural,

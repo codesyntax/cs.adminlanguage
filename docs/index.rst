@@ -1,5 +1,0 @@
-================
-cs.adminlanguage
-================
-
-User documentation

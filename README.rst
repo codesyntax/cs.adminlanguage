@@ -28,7 +28,7 @@ Install cs.adminlanguage by adding it to your buildout::
 and then running ``bin/buildout``.
 Then start Plone and activate the add-on in the Add-ons control panel.
 
-Now you can go to the Language Admin Settings control panel from this add-on and set the prefered admin language.
+Now you can go to the Language Admin Settings control panel from this add-on and set the preferred admin language.
 This language will be used for all translation messages in domains that start with "plone" or "collective" (or the "linguaplone" domain).
 
 Now any authenticated user with the "cs.adminlanguage: ViewinAdminLanguage" permission will see messages from those domains in the chosen admin language.

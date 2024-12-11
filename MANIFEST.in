@@ -1,4 +1,16 @@
-graft src/cs
-graft docs
+include *.in
 include *.rst
-global-exclude *.pyc
+include *.txt
+include .coveragerc
+include base.cfg
+include bobtemplate.cfg
+include buildout.cfg
+include test_plone60.cfg
+recursive-include news *.gitkeep
+recursive-include news *.internal
+recursive-include src *.po
+recursive-include src *.pot
+recursive-include src *.rst
+recursive-include src *.sh
+recursive-include src *.xml
+recursive-include src *.zcml

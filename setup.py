@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Installer for the cs.adminlanguage package."""
 
 from setuptools import find_packages
@@ -24,14 +23,14 @@ setup(
         "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Plone :: Addon",
-        "Framework :: Plone :: 5.1",
-        "Framework :: Plone :: 5.2",
+        "Framework :: Plone :: 6.0",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+        "Development Status :: 5 - Production/Stable",
     ],
     keywords="Python Plone",
     author="Lur Ibargutxi",
@@ -41,7 +40,6 @@ setup(
         "PyPI": "https://pypi.python.org/pypi/cs.adminlanguage",
         "Source": "https://github.com/collective/cs.adminlanguage",
         "Tracker": "https://github.com/collective/cs.adminlanguage/issues",
-        # 'Documentation': 'https://cs.adminlanguage.readthedocs.io/en/latest/',
     },
     license="GPL version 2",
     packages=find_packages("src", exclude=["ez_setup"]),
@@ -49,11 +47,23 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
+    python_requires=">=3.10",
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
-        "plone.api",
-        "plone.app.dexterity",
+        "AccessControl",
+        "plone.app.registry",
+        "plone.registry",
+        "plone.z3cform",
+        "Products.CMFCore",
+        "Products.CMFPlone",
+        "Products.GenericSetup",
+        "zope.component",
+        "zope.i18n",
+        "zope.i18nmessageid",
+        "zope.interface",
+        "zope.publisher",
+        "zope.schema",
     ],
     extras_require={
         "test": [
@@ -61,9 +71,11 @@ setup(
             # Plone KGS does not use this version, because it would break
             # Remove if your package shall be part of coredev.
             # plone_coredev tests as of 2016-04-01.
-            "plone.testing>=5.0.0",
+            "plone.api",
             "plone.app.contenttypes",
             "plone.app.robotframework[debug]",
+            "plone.browserlayer",
+            "plone.testing>=5.0.0",
         ]
     },
     entry_points="""
