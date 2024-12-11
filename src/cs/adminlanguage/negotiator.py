@@ -29,15 +29,11 @@ def find_context(request):
     return context
 
 
-def get_editor_language(request):
-    """
-    Get editor language override if Silvuple is installed.
-    """
+def _get_editor_language(request):
+    """Get editor language override if cs.adminlanguage is installed.
 
-    cached = getattr(request, "_cached_admin_language", None)
-    if cached:
-        return cached
-
+    This is the uncached version.
+    """
     if not ICsAdminlanguageLayer.providedBy(request):
         # Add on is not active
         return None
@@ -71,14 +67,23 @@ def get_editor_language(request):
         return None
 
     # Read language from settings
-    language = settings.adminLanguage
+    return settings.adminLanguage
 
-    if language:
-        # Fake new language for all authenticated users
-        request._cached_admin_language = language
-        return language
 
-    return None
+_cache_attribute_name = "_cached_admin_language"
+_marker = object()
+
+
+def get_editor_language(request):
+    """Get editor language override if cs.adminlanguage is installed.
+
+    This is the cached version.
+    """
+    language = getattr(request, _cache_attribute_name, _marker)
+    if language is _marker:
+        language = _get_editor_language(request)
+        setattr(request, _cache_attribute_name, language)
+    return language
 
 
 def is_editor_language_domain(domain):
@@ -96,10 +101,24 @@ _unpatched_translate = None
 
 
 def _patched_translate(
-    self, msgid, mapping=None, context=None, target_language=None, default=None
+    self, msgid, mapping=None, context=None, target_language=None, default=None,
+    msgid_plural=None, default_plural=None, number=None,
 ):
-    """ TranslatioDomain.translate() patched for editor language support
+    """ TranslationDomain.translate() patched for editor language support
+
     :param context: HTTPRequest object
+
+    This patch overrides the target_language keyword argument if needed.
+
+    These three were added in zope.i18n 4.5:
+    msgid_plural=None, default_plural=None, number=None
+
+    I tried to pass them on when needed by accepting **kwargs and passing those
+    along, but this would still result in an error in Plone 6:
+
+    TypeError: _patched_translate() takes from 2 to 6 positional arguments but 9 were given
+
+    So: accept them, but only pass them along when set.
     """
 
     # Override translation language?
@@ -113,9 +132,18 @@ def _patched_translate(
         logger.error("Admin language force patch failed")
         logger.exception(e)
 
-    # print "_patched_translate: %s: %s, %s" % (msgid, self.domain, target_language)
+    if msgid_plural is not None or default_plural is not None or number is not None:
+        extra = dict(
+            msgid_plural=msgid_plural,
+            default_plural=default_plural,
+            number=number,
+        )
+    else:
+        extra = {}
 
-    return _unpatched_translate(self, msgid, mapping, context, target_language, default)
+    return _unpatched_translate(
+        self, msgid, mapping, context, target_language, default, **extra
+    )
 
 
 _unpatched_translate = TranslationDomain.translate
