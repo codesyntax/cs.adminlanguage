@@ -3,13 +3,12 @@
 # See the inline comments on how to expand/tweak this configuration file
 [meta]
 template = "default"
-commit-id = "d03b196d"
+commit-id = "18642aac"
 
 [github]
 jobs = [
     "qa",
     "test",
     "coverage",
-    "dependencies",
     "release_ready",
     ]

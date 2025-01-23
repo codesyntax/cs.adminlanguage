@@ -51,4 +51,14 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
+  <!-- plone_portal_state override -->
+  <browser:page
+      name="plone_portal_state"
+      for="*"
+      class=".browser.PortalState"
+      allowed_interface="plone.app.layout.globals.interfaces.IPortalState"
+      permission="zope.Public"
+      layer=".interfaces.ICsAdminlanguageLayer"
+      />
+
 </configure>
