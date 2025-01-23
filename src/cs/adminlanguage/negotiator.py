@@ -11,6 +11,7 @@ from Products.CMFCore.interfaces import IContentish
 from Products.CMFCore.interfaces import IFolderish
 from zope.component import ComponentLookupError
 from zope.component import getUtility
+from zope.globalrequest import getRequest
 from zope.i18n.translationdomain import TranslationDomain
 
 import logging
@@ -81,6 +82,9 @@ def get_editor_language(request):
 
     This is the cached version.
     """
+    if request is None:
+        request = getRequest()
+
     language = getattr(request, _cache_attribute_name, _marker)
     if language is _marker:
         language = _get_editor_language(request)
