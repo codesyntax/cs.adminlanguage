@@ -59,6 +59,7 @@ setup(
         "Products.CMFPlone",
         "Products.GenericSetup",
         "zope.component",
+        "zope.globalrequest",
         "zope.i18n",
         "zope.i18nmessageid",
         "zope.interface",
