@@ -15,18 +15,11 @@ Internal:
   [plone devs]
 
 
-Changelog
-=========
-
-
-1.1 (unreleased)
-----------------
-
-- Nothing changed yet.
-
 
 1.0 (2024-12-11)
 ----------------
+
+Internal:
 
 - Initial release.
   [libargutxi]
