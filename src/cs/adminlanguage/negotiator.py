@@ -1,6 +1,6 @@
 """
-    Override user interface language setting: taken from silvuple:
-    https://github.com/miohtama/silvuple/blob/master/silvuple/negotiator.py
+Override user interface language setting: taken from silvuple:
+https://github.com/miohtama/silvuple/blob/master/silvuple/negotiator.py
 """
 
 from AccessControl import getSecurityManager
@@ -15,7 +15,6 @@ from zope.globalrequest import getRequest
 from zope.i18n.translationdomain import TranslationDomain
 
 import logging
-
 
 logger = logging.getLogger("cs.languageadmin")
 
