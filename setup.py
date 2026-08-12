@@ -13,7 +13,7 @@ long_description = "\n\n".join(
 
 setup(
     name="cs.adminlanguage",
-    version="2.0.dev0",
+    version="2.0",
     description="Addon to set the admin language",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
